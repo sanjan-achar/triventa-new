@@ -437,15 +437,6 @@ function App() {
               </a>
             </div>
             <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-number">100%</span>
-                <span className="stat-label">Board Verified Sources</span>
-              </div>
-              <div className="stat-item">
-                <span className="stat-number">Grade AA</span>
-                <span className="stat-label">Export Standards</span>
-              </div>
-
             </div>
           </div>
           <div className="hero-media animate-fade-in">
@@ -457,7 +448,6 @@ function App() {
               />
               <div className="media-overlay-tag">
                 <span className="crop-status">● GREEN COFFEE ONLY</span>
-                <span className="crop-details">Plantation AA &amp; Kaapi Royale</span>
               </div>
             </div>
           </div>
@@ -834,7 +824,7 @@ function App() {
                 <span className="footer-logo-text">TRIVENTA EXPORTS</span>
               </div>
               <p className="footer-tagline">
-                Premium exporter of unroasted specialty green Arabica and Robusta coffee beans, sourced directly through local coffee boards in Chikkamagaluru.
+                Premium exporter of unroasted specialty green Arabica and Robusta coffee beans, sourced directly through local coffee boards in Karnataka.
               </p>
               <span className="copyright">© 2026 Triventa Exports Private Limited. All rights reserved.</span>
             </div>
@@ -849,15 +839,18 @@ function App() {
             <div className="footer-links-col">
               <h4 className="footer-title">Logistics &amp; Sourcing</h4>
               <a href="#calculator">FOB Calculator</a>
-              <a href="#process">Mangalore Port Export</a>
-              <a href="#process">Coffee Board auctions</a>
-              <a href="#about">Moisture Standards</a>
+              <a href="#process">Sourcing Journey</a>
+              <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Request Samples</a>
             </div>
             <div className="footer-links-col">
               <h4 className="footer-title">Trade Desk</h4>
               <p>Email: <a href="mailto:info@triventaexports.com" className="footer-contact-link">info@triventaexports.com</a></p>
               <p>Phone: <a href="tel:+919148025018" className="footer-contact-link">+91 91480 25018</a></p>
               <p>Mangalore, Karnataka, India</p>
+              <div className="business-ids">
+                <p><strong>GSTIN:</strong> 29AAMCT6839P1Z5</p>
+                <p><strong>CIN:</strong> U46209KA2026PTC214010</p>
+              </div>
             </div>
           </div>
         </div>

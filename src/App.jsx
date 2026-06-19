@@ -267,6 +267,27 @@ function App() {
       });
   }, []);
 
+  // Persist selected samples (cart) to localStorage
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem('sampleCart');
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) setSelectedBeanIds(parsed);
+      }
+    } catch (e) {
+      // ignore parse errors
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('sampleCart', JSON.stringify(selectedBeanIds));
+    } catch (e) {
+      // ignore storage errors
+    }
+  }, [selectedBeanIds]);
+
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark-theme');
@@ -343,14 +364,14 @@ function App() {
       {/* Header & Navigation */}
       <header className="site-header">
         <div className="header-container">
-          <div className="logo-container">
+          <a href="/" className="logo-container logo-link">
             <span
               className="logo-image"
               aria-label="Triventa Exports Logo"
               role="img"
             />
             <span className="logo-text">TRIVENTA EXPORTS</span>
-          </div>
+          </a>
           <nav className="site-nav">
             <a href="#origins">Green Varieties</a>
             <a href="#guide">Grades Guide</a>
@@ -421,9 +442,10 @@ function App() {
       <section className="hero-section">
         <div className="hero-container">
           <div className="hero-content animate-fade-in">
-            <span className="hero-badge">Specialty Green Coffee Exporter</span>
+            <span className="hero-badge">Coffee Exporters from KARNATAKA.</span>
+            <p className="hero-slogan"></p>
             <h1 className="hero-title">
-              Coffee Exporters from KARNATAKA.
+              Your Gateway to Global Markets
             </h1>
             <p className="hero-description">
               Triventa Exports supplies unroasted green coffee beans sourced through the local coffee boards in Karnataka, India. We deal exclusively in raw green Arabica and Robusta grades for global roasters.
@@ -492,7 +514,7 @@ function App() {
         <div className="showcase-container">
           <div className="section-header">
             <h2 className="section-title">Wholesale Green Coffee Catalog</h2>
-            <p className="section-subtitle">Browse raw green coffee grades sourced directly from local auctions in Chikkamagaluru.</p>
+            <p className="section-subtitle">Browse raw green coffee grades sourced directly from local auctions.</p>
           </div>
 
           {/* Filter Controls */}
@@ -606,7 +628,7 @@ function App() {
               ))
             ) : (
               <div className="empty-state">
-                <p>No green coffee varieties match your selection. Try adjusting filters or search terms.</p>
+                <p>No coffee varieties match your selection. Try adjusting filters or search terms.</p>
                 <button
                   type="button"
                   className="reset-filters-btn"
@@ -621,24 +643,26 @@ function App() {
 
         {/* Selected Bean Floating Action Bar */}
         {selectedBeanIds.length > 0 && (
-          <div className="selection-action-bar animate-fade-in">
-            <div className="bar-details">
-              <span className="bar-count">Grades selected</span>
-              <span className="bar-names">
-                ({beans.filter(b => selectedBeanIds.includes(b.id)).map(b => b.name).join(', ')})
-              </span>
-            </div>
-            <div className="bar-buttons">
-              <button type="button" className="bar-clear-btn" onClick={handleClearSelection}>
-                Clear
-              </button>
-              <button
-                type="button"
-                className="bar-submit-btn"
-                onClick={() => handleOpenSampleModal(selectedBeanIds[0])}
-              >
-                Request Free Green Samples
-              </button>
+          <div className="slide-cart animate-slide-up" role="region" aria-label="Sample cart">
+            <div className="cart-content">
+              <div className="cart-header">
+                <strong>Sample Cart</strong>
+                <span className="cart-count">{selectedBeanIds.length}</span>
+              </div>
+              <div className="cart-items">
+                {beans.filter(b => selectedBeanIds.includes(b.id)).map(b => (
+                  <div className="cart-item" key={b.id}>
+                    <div className="cart-item-name">{b.name}</div>
+                    <div className="cart-item-actions">
+                      <button type="button" className="cart-remove-btn" onClick={() => handleToggleSelectBean(b.id)}>Remove</button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="cart-actions">
+                <button type="button" className="cart-clear-btn" onClick={handleClearSelection}>Clear</button>
+                <button type="button" className="cart-proceed-btn" onClick={() => handleOpenSampleModal(selectedBeanIds[0])}>Proceed to Sample Request</button>
+              </div>
             </div>
           </div>
         )}
@@ -799,13 +823,11 @@ function App() {
                 Join Offer List
               </button>
             </div>
-            <div className="contact-quick">
-              <span>Corporate Address: <strong>Mangalore, Dakshina Kannada, Karnataka, India</strong></span>
-              <span className="divider-dot">•</span>
-              <span>Tel: <a href="tel:+919148025018"><strong>+91 91480 25018</strong></a></span>
-              <span className="divider-dot">•</span>
+            <div className="contact-details">
+              <span>Phone: <a href="tel:+919148025018"><strong>+91 91480 25018</strong></a></span>
               <span>Email: <a href="mailto:info@triventaexports.com"><strong>info@triventaexports.com</strong></a></span>
             </div>
+
           </div>
         </div>
       </section>
@@ -814,44 +836,39 @@ function App() {
       <footer className="site-footer">
         <div className="footer-container">
           <div className="footer-cols">
-            <div className="footer-brand-col">
-              <div className="footer-logo-container">
-                <span
-                  className="footer-logo-image"
-                  aria-label="Triventa Exports Logo"
-                  role="img"
-                />
-                <span className="footer-logo-text">TRIVENTA EXPORTS</span>
-              </div>
-              <p className="footer-tagline">
-                Premium exporter of unroasted specialty green Arabica and Robusta coffee beans, sourced directly through local coffee boards in Karnataka.
-              </p>
-              <span className="copyright">© 2026 Triventa Exports Private Limited. All rights reserved.</span>
+            <div className="footer-links-col footer-about-col">
+              <h4 className="footer-title">About Us</h4>
+              <p>Triventa Exports is a premium exporter of specialty green coffee from Karnataka.</p>
+              <p><strong>GSTIN:</strong> 29AAMCT6839P1Z5</p>
+              <p><strong>CIN:</strong> U46209KA2026PTC214010</p>
+              <p>Corporate Office: Mangalore, Karnataka, India</p>
             </div>
+
             <div className="footer-links-col">
-              <h4 className="footer-title">Green Coffee Grades</h4>
-              <a href="#origins">Arabica Plantation AA (PL AA)</a>
-              <a href="#origins">Robusta Parchment AB (RP AB)</a>
-              <a href="#origins">Arabica Cherry A (AC A)</a>
-              <a href="#origins">Mysore Nuggets Extra Bold (PL AAA)</a>
-              <a href="#origins">Robusta Kaapi Royale (RKR)</a>
+              <h4 className="footer-title">Legal</h4>
+              <a href="/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              <a href="/cookies" target="_blank" rel="noopener noreferrer">Cookies</a>
+              <a href="/terms" target="_blank" rel="noopener noreferrer">Terms and Conditions</a>
             </div>
+
             <div className="footer-links-col">
               <h4 className="footer-title">Logistics &amp; Sourcing</h4>
               <a href="#calculator">FOB Calculator</a>
               <a href="#process">Sourcing Journey</a>
               <a href="#" onClick={(e) => { e.preventDefault(); setIsModalOpen(true); }}>Request Samples</a>
             </div>
+
             <div className="footer-links-col">
-              <h4 className="footer-title">Trade Desk</h4>
-              <p>Email: <a href="mailto:info@triventaexports.com" className="footer-contact-link">info@triventaexports.com</a></p>
-              <p>Phone: <a href="tel:+919148025018" className="footer-contact-link">+91 91480 25018</a></p>
-              <p>Mangalore, Karnataka, India</p>
-              <div className="business-ids">
-                <p><strong>GSTIN:</strong> 29AAMCT6839P1Z5</p>
-                <p><strong>CIN:</strong> U46209KA2026PTC214010</p>
-              </div>
+              <h4 className="footer-title">Coffee Grades</h4>
+              <a href="#origins">Arabica Plantation AA (PL AA)</a>
+              <a href="#origins">Robusta Parchment AB (RP AB)</a>
+              <a href="#origins">Arabica Cherry A (AC A)</a>
+              <a href="#origins">Mysore Nuggets Extra Bold (PL AAA)</a>
+              <a href="#origins">Robusta Kaapi Royale (RKR)</a>
             </div>
+          </div>
+          <div className="footer-bottom-row">
+            <span className="copyright">© 2026 Triventa Exports Private Limited. All rights reserved.</span>
           </div>
         </div>
       </footer>

@@ -235,13 +235,13 @@ function QuoteCalculator({ beans, onOpenSampleModal, selectedBeanIds }) {
                 type="range"
                 className="qty-slider"
                 min="1"
-                max={unit === 'bags' ? 300 : 10}
+                max={unit === 'bags' ? 320 : 10}
                 value={quantity}
                 onChange={handleQtySlider}
               />
               <div className="slider-labels">
                 <span>Min (1)</span>
-                <span>Max ({unit === 'bags' ? '300' : '10'})</span>
+                <span>Max ({unit === 'bags' ? '320' : '10'})</span>
               </div>
             </div>
           </div>
@@ -282,18 +282,6 @@ function QuoteCalculator({ beans, onOpenSampleModal, selectedBeanIds }) {
               <div className="calc-disclaimer-warning">
                 ⚠️ IMPORTANT MARKET NOTICE: The price displayed is a simulated FOB estimate. This is NOT a final binding price. Sourcing rates are determined directly by daily local coffee board auctions in Chikkamagaluru and are subject to immediate changes, currency rates, and market differentials.
               </div>
-
-              <button
-                type="button"
-                className="calc-cta-btn"
-                onClick={() => onOpenSampleModal(selectedBeanId, totalBags)}
-              >
-                Inquire &amp; Request Sample
-                <svg className="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </button>
             </div>
           </div>
         </>

@@ -88,7 +88,7 @@ function BeanCard({ bean, isSelected, onToggleSelect }) {
               <svg className="btn-icon check" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              Requested Sample
+                Added to cart
             </>
           ) : (
             <>

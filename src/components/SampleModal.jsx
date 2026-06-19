@@ -112,7 +112,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
                       />
                       <div className="modal-bean-info">
                         <span className="modal-bean-origin">{bean.origin}</span>
-                        <span className="modal-bean-name">{bean.name} (Q: {bean.score})</span>
+                          <span className="modal-bean-name">{bean.name}</span>
                       </div>
                     </label>
                   ))}

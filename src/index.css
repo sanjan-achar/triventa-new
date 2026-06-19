@@ -22,6 +22,9 @@
 
   font-size: 16px;
   line-height: 1.6;
+  /* Semantic brand fill and contrast that adapt to theme */
+  --brand-fill: var(--text-primary);
+  --brand-contrast: var(--bg-primary);
   color: var(--text-primary);
   background-color: var(--bg-primary);
   font-family: var(--font-sans);
@@ -48,6 +51,8 @@
   --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
   --shadow-md: 0 8px 16px -4px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 20px 24px -4px rgba(0, 0, 0, 0.5);
+  --brand-fill: var(--accent-coffee);
+  --brand-contrast: var(--text-primary);
 }
 
 * {

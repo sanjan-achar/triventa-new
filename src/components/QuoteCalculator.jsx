@@ -204,7 +204,7 @@ function QuoteCalculator({ beans, onOpenSampleModal, selectedBeanIds }) {
                 {beans.length > 0 ? (
                   beans.map((bean) => (
                     <option key={bean.id} value={bean.id}>
-                      {bean.origin} — {bean.name} (Q-Score: {bean.score})
+                      {bean.name}
                     </option>
                   ))
                 ) : (

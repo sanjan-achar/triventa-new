@@ -1,10 +1,19 @@
 /* --- HEADER & NAVIGATION --- */
 .page-shell {
-  max-width: 1280px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
 }
 
 .page-content {
+  width: 100%;
+}
+
+.calculator-container {
+  max-width: 1200px;
+}
+
+.calculator-widget {
   width: 100%;
 }
 
@@ -179,6 +188,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  z-index: 110;
 }
 
 .mobile-close-btn svg {
@@ -215,7 +225,9 @@
   gap: 28px;
   align-items: center;
   width: 100%;
+  max-width: 100%;
   padding: 0 24px;
+  margin-top: 90px;
 }
 
 .mobile-nav-links a {
@@ -253,13 +265,10 @@
 
 .mobile-nav-drawer {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--glass-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background-color: var(--bg-primary);
   z-index: 105;
   display: flex;
   flex-direction: column;
@@ -1222,10 +1231,19 @@
   overflow: hidden;
   box-shadow: var(--shadow-md);
   margin-top: 48px;
+  min-height: 520px;
+}
+
+.calc-left,
+.calc-right {
+  min-height: 520px;
 }
 
 .calc-left {
   padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .calc-right {
@@ -1233,6 +1251,19 @@
   border-left: 1px solid var(--border);
   padding: 48px;
   display: flex;
+  align-items: center;
+}
+
+.results-panel,
+.teaser-content {
+  width: 100%;
+}
+
+.teaser-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
 }
 
 .calc-title {
@@ -2297,6 +2328,11 @@
   background-color: var(--bg-primary);
 }
 
+.guide-container {
+  width: min(100%, 1200px);
+  margin: 0 auto;
+}
+
 .guide-grid {
   display: grid;
   grid-template-columns: 1fr 1.2fr;
@@ -2352,6 +2388,7 @@
 
 .guide-table-wrapper {
   overflow-x: auto;
+  margin-top: 16px;
 }
 
 .guide-table {
@@ -2412,7 +2449,6 @@
   }
 
   .guide-grid {
-    grid-template-columns: 1fr;
     gap: 32px;
   }
 
@@ -2428,6 +2464,10 @@
   .calc-right {
     border-left: none;
     border-top: 1px solid var(--border);
+  }
+
+  .guide-grid {
+    grid-template-columns: 1fr;
   }
 
   .testimonials-grid {
@@ -2455,6 +2495,74 @@
     border-bottom: 1px solid var(--border);
   }
 
+  .calculator-widget,
+  .calc-left,
+  .calc-right {
+    min-height: auto;
+  }
+
+  .calculator-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+  }
+
+  .calculator-widget {
+    gap: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .calc-left,
+  .calc-right {
+    padding: 24px 16px;
+  }
+
+  .calc-left {
+    justify-content: flex-start;
+  }
+
+  .calc-unlock-form .form-row,
+  .unit-buttons {
+    flex-direction: column;
+  }
+
+  .form-group {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .form-select,
+  .form-input,
+  .form-textarea {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .unit-btn {
+    width: 100%;
+  }
+
+  .qty-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .qty-input-wrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .teaser-panel {
+    padding: 0;
+  }
+
+  .teaser-content {
+    padding: 20px 14px;
+  }
+
   .site-nav {
     display: none;
   }
@@ -2478,6 +2586,10 @@
     cursor: pointer;
     padding: 0;
     z-index: 110;
+  }
+
+  .mobile-menu-toggle.open {
+    display: none;
   }
 
   .mobile-close-btn {
@@ -2664,10 +2776,34 @@
     margin-bottom: 20px;
   }
 
-  .calculator-widget,
+  .calculator-widget {
+    gap: 24px;
+  }
+
   .calc-left,
   .calc-right {
-    padding: 24px 16px;
+    padding: 20px 14px;
+  }
+
+  .calc-unlock-form .form-row,
+  .unit-buttons {
+    flex-direction: column;
+  }
+
+  .form-group {
+    min-width: 0;
+  }
+
+  .qty-input-wrapper {
+    width: 100%;
+  }
+
+  .teaser-content {
+    padding: 24px 12px;
+  }
+
+  .teaser-panel {
+    align-items: flex-start;
   }
 
   .price-highlight {
@@ -2712,6 +2848,7 @@
   }
 
   .modal-grid {
+    grid-template-columns: 1fr;
     gap: 24px;
   }
 
@@ -2747,6 +2884,31 @@
 
   .guide-card {
     padding: 24px 16px;
+  }
+
+  .guide-container {
+    padding-inline: 0;
+  }
+
+  .guide-section {
+    padding: 48px 16px;
+  }
+
+  .guide-table-wrapper {
+    margin-top: 12px;
+  }
+
+  .guide-table th,
+  .guide-table td {
+    padding: 10px 8px;
+  }
+
+  .guide-table th {
+    font-size: 0.75rem;
+  }
+
+  .guide-table td {
+    font-size: 0.85rem;
   }
 }
 

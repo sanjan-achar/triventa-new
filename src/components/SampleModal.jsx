@@ -16,6 +16,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
   const [submissionStep, setSubmissionStep] = useState(0); // 0: input, 1: submitting, 2: success
   const [submitMessage, setSubmitMessage] = useState('Initiating request...');
   const [trackingRef, setTrackingRef] = useState('');
+  const [copiedTrackingRef, setCopiedTrackingRef] = useState(false);
 
   const createTrackingRef = () => {
     const now = new Date();
@@ -28,8 +29,30 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
   useEffect(() => {
     if (isOpen) {
       setTrackingRef(createTrackingRef());
+      setSubmissionStep(0);
+      setSubmitMessage('Initiating request...');
+      setCopiedTrackingRef(false);
     }
   }, [isOpen]);
+
+  const handleCopyTrackingRef = async () => {
+    if (!trackingRef) return;
+    try {
+      await navigator.clipboard.writeText(trackingRef);
+      setCopiedTrackingRef(true);
+      setTimeout(() => setCopiedTrackingRef(false), 2000);
+    } catch (err) {
+      console.error('Copy failed:', err);
+      alert('Unable to copy the tracking reference. Please copy it manually.');
+    }
+  };
+
+  const handleCloseModal = () => {
+    setSubmissionStep(0);
+    setSubmitMessage('Initiating request...');
+    setCopiedTrackingRef(false);
+    onClose();
+  };
 
   // Handle Escape key to close modal
   useEffect(() => {
@@ -101,14 +124,16 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
   const selectedBeansList = beans.filter(b => selectedBeanIds.includes(b.id));
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className="modal-overlay" onClick={handleCloseModal}>
       <div className="modal-container animate-fade-in" onClick={(e) => e.stopPropagation()}>
-        <button type="button" className="modal-close-btn" onClick={onClose} aria-label="Close modal">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
+        {submissionStep !== 2 && (
+          <button type="button" className="modal-close-btn" onClick={(e) => { e.stopPropagation(); handleCloseModal(); }} aria-label="Close modal">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        )}
 
         {submissionStep === 0 && (
           <form
@@ -278,10 +303,26 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
               Your sample request for <strong>{selectedBeansList.map(b => b.name).join(', ')}</strong> has been registered.
             </p>
             <div className="success-details">
-              <p><strong>Tracking Reference:</strong> {trackingRef}</p>
+              <div className="copy-row">
+                <p>
+                  <strong>Tracking Reference:</strong> {trackingRef}
+                </p>
+                <button
+                  type="button"
+                  className={`copy-ref-btn ${copiedTrackingRef ? 'copied' : ''}`}
+                  onClick={handleCopyTrackingRef}
+                  aria-label="Copy tracking reference"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M8 7H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" />
+                    <rect x="9" y="3" width="11" height="11" rx="2" />
+                  </svg>
+                </button>
+                {copiedTrackingRef && <span className="copy-feedback">Copied!</span>}
+              </div>
               <p>A regional coffee trade representative from Triventa Exports will contact you at <strong>{formData.email}</strong> within 12 business hours to verify your roasting business credentials and dispatch the samples.</p>
             </div>
-            <button type="button" className="success-close-btn" onClick={onClose}>
+            <button type="button" className="success-close-btn" onClick={handleCloseModal}>
               Return to Origins Explorer
             </button>
           </div>

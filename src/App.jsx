@@ -383,6 +383,7 @@ function App() {
 
   return (
     <>
+      <div className="page-shell">
       {/* Header & Navigation */}
       <header className="site-header">
         <div className="header-container">
@@ -433,6 +434,17 @@ function App() {
 
       {/* Mobile Navigation Drawer */}
       <div className={`mobile-nav-drawer ${isMobileMenuOpen ? 'open' : ''}`}>
+        <button
+          type="button"
+          className="mobile-close-btn"
+          onClick={() => setIsMobileMenuOpen(false)}
+          aria-label="Close mobile navigation"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
         <nav className="mobile-nav-links">
           <a href="#origins" onClick={() => setIsMobileMenuOpen(false)}>Green Varieties</a>
           <a href="#guide" onClick={() => setIsMobileMenuOpen(false)}>Grades Guide</a>
@@ -912,6 +924,7 @@ function App() {
         </div>
       </footer>
 
+      </div>
       {/* Interactive Booking Modal */}
       {isModalOpen && (
         <SampleModal

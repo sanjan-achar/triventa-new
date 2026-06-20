@@ -45,7 +45,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.roastery || !formData.email || !formData.country) {
       alert('Please fill out all required fields.');
@@ -56,7 +56,16 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
       return;
     }
 
-    // Start simulation steps
+    const form = e.target;
+    try {
+      await fetch('/', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+    } catch (err) {
+      console.error('Sample request submission failed:', err);
+    }
+
     setSubmissionStep(1);
     
     const steps = [
@@ -90,8 +99,17 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
         </button>
 
         {submissionStep === 0 && (
-          <form onSubmit={handleSubmit} className="modal-form">
-            <div className="modal-header">
+          <form
+          name="request-sample"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          onSubmit={handleSubmit}
+          className="modal-form"
+        >
+          <input type="hidden" name="form-name" value="request-sample" />
+          <input type="hidden" name="bot-field" />
+          <div className="modal-header">
               <h3 className="modal-title">Request Specialty Green Samples</h3>
               <p className="modal-subtitle">
                 Select your desired micro-lots and enter your roastery details. We ship 300g cupping samples globally.
@@ -106,6 +124,8 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
                     <label key={bean.id} className={`modal-bean-option ${selectedBeanIds.includes(bean.id) ? 'checked' : ''}`}>
                       <input
                         type="checkbox"
+                        name="selected-beans"
+                        value={`${bean.origin} — ${bean.name}`}
                         checked={selectedBeanIds.includes(bean.id)}
                         onChange={() => handleCheckboxChange(bean.id)}
                         className="modal-bean-checkbox"

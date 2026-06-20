@@ -69,9 +69,18 @@ function QuoteCalculator({ beans, onOpenSampleModal, selectedBeanIds }) {
     }
   };
 
-  const handleUnlockSubmit = (e) => {
+  const handleUnlockSubmit = async (e) => {
     e.preventDefault();
     if (userDetails.name && userDetails.company && userDetails.email && userDetails.country) {
+      const form = e.target;
+      try {
+        await fetch('/', {
+          method: 'POST',
+          body: new FormData(form),
+        });
+      } catch (err) {
+        console.error('FOB calculator submission failed:', err);
+      }
       setIsUnlocked(true);
     } else {
       alert('Please fill out all fields to unlock the calculator.');
@@ -91,7 +100,16 @@ function QuoteCalculator({ beans, onOpenSampleModal, selectedBeanIds }) {
             <h3 className="calc-title">Unlock FOB Export Calculator</h3>
             <p className="calc-subtitle">Please enter your business details to unlock real-time volume estimates and pricing projections.</p>
 
-            <form onSubmit={handleUnlockSubmit} className="calc-unlock-form">
+            <form
+              name="fob-calculator"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleUnlockSubmit}
+              className="calc-unlock-form"
+            >
+              <input type="hidden" name="form-name" value="fob-calculator" />
+              <input type="hidden" name="bot-field" />
               <div className="form-row">
                 <div className="form-group flex-1">
                   <label className="form-label required">Full Name</label>

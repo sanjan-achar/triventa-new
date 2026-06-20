@@ -206,6 +206,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalInitialBeanId, setModalInitialBeanId] = useState('');
   const [modalInitialQty, setModalInitialQty] = useState(0);
+  const [offerEmail, setOfferEmail] = useState('');
 
   // Filters State
   const [searchTerm, setSearchTerm] = useState('');
@@ -308,6 +309,27 @@ function App() {
     setModalInitialBeanId(initialBeanId);
     setModalInitialQty(qty);
     setIsModalOpen(true);
+  };
+
+  const handleOfferSubmit = async (e) => {
+    e.preventDefault();
+    if (!offerEmail) {
+      alert('Please enter a business email address before joining the offer list.');
+      return;
+    }
+
+    const form = e.target;
+    try {
+      await fetch('/', {
+        method: 'POST',
+        body: new FormData(form),
+      });
+      alert('Thank you for subscribing to Triventa Exports harvest list.');
+      setOfferEmail('');
+    } catch (err) {
+      console.error('Offer list submission failed:', err);
+      alert('There was an issue submitting your request. Please try again or email info@triventaexports.com.');
+    }
   };
 
   const handleClearSelection = () => {
@@ -817,12 +839,29 @@ function App() {
               <h2 className="section-title">Receive Harvest Alerts &amp; Offer Lists</h2>
               <p className="section-subtitle">Subscribe to receive green coffee micro-lot allocations, pre-harvest cupping sheets, and shipping schedules.</p>
             </div>
-            <div className="subscribe-form">
-              <input type="email" className="sub-input" placeholder="Enter business email address" required />
-              <button type="button" className="sub-btn" onClick={() => alert('Thank you for subscribing to Triventa Exports harvest list.')}>
+            <form
+              name="offer-list"
+              method="POST"
+              data-netlify="true"
+              netlify-honeypot="bot-field"
+              onSubmit={handleOfferSubmit}
+              className="subscribe-form"
+            >
+              <input type="hidden" name="form-name" value="offer-list" />
+              <input type="hidden" name="bot-field" />
+              <input
+                type="email"
+                name="email"
+                className="sub-input"
+                placeholder="Enter business email address"
+                value={offerEmail}
+                onChange={(e) => setOfferEmail(e.target.value)}
+                required
+              />
+              <button type="submit" className="sub-btn">
                 Join Offer List
               </button>
-            </div>
+            </form>
             <div className="contact-details">
               <span>Phone: <a href="tel:+919148025018"><strong>+91 91480 25018</strong></a></span>
               <span>Email: <a href="mailto:info@triventaexports.com"><strong>info@triventaexports.com</strong></a></span>

@@ -17,6 +17,35 @@
   </head>
   <body>
     <div id="root"></div>
+
+    <!-- Netlify form registration for React SPA forms -->
+    <div hidden>
+      <form name="request-sample" data-netlify="true">
+        <input type="hidden" name="form-name" value="request-sample" />
+        <input type="hidden" name="bot-field" />
+        <input type="text" name="name" />
+        <input type="text" name="roastery" />
+        <input type="email" name="email" />
+        <input type="text" name="country" />
+        <input type="text" name="selected-beans" />
+      </form>
+
+      <form name="fob-calculator" data-netlify="true">
+        <input type="hidden" name="form-name" value="fob-calculator" />
+        <input type="hidden" name="bot-field" />
+        <input type="text" name="name" />
+        <input type="text" name="company" />
+        <input type="email" name="email" />
+        <input type="text" name="country" />
+      </form>
+
+      <form name="offer-list" data-netlify="true">
+        <input type="hidden" name="form-name" value="offer-list" />
+        <input type="hidden" name="bot-field" />
+        <input type="email" name="email" />
+      </form>
+    </div>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -15,9 +15,21 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
   );
   const [submissionStep, setSubmissionStep] = useState(0); // 0: input, 1: submitting, 2: success
   const [submitMessage, setSubmitMessage] = useState('Initiating request...');
-  
-  // Purely initialize tracking reference once on mount
-  const [trackingRef] = useState(() => `OB-${Math.floor(100000 + Math.random() * 900000)}`);
+  const [trackingRef, setTrackingRef] = useState('');
+
+  const createTrackingRef = () => {
+    const now = new Date();
+    const yy = String(now.getFullYear()).slice(-2);
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const seq = String(Math.floor(Math.random() * 999) + 1).padStart(3, '0');
+    return `TES-${yy}${mm}${seq}`;
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      setTrackingRef(createTrackingRef());
+    }
+  }, [isOpen]);
 
   // Handle Escape key to close modal
   useEffect(() => {
@@ -109,6 +121,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
         >
           <input type="hidden" name="form-name" value="request-sample" />
           <input type="hidden" name="bot-field" />
+          <input type="hidden" name="tracking-ref" value={trackingRef} />
           <div className="modal-header">
               <h3 className="modal-title">Request Specialty Green Samples</h3>
               <p className="modal-subtitle">

@@ -222,6 +222,16 @@ function App() {
   // Light/Dark Theme state (Defaults to Light Mode)
   const [isDarkMode, setIsDarkMode] = useState(false);
 
+  // Initial loading screen state (3 seconds duration)
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsInitialLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
   useEffect(() => {
     if (!GOOGLE_SHEETS_CSV_URL) {
       startTransition(() => {
@@ -382,6 +392,19 @@ function App() {
       desc: "Green coffee is packed in protective GrainPro barrier liners to prevent humidity damage, loaded into containers, and exported globally via the Port of Mangalore."
     }
   ];
+
+  if (isInitialLoading) {
+    return (
+      <div className="initial-loader-screen">
+        <div className="initial-loader-content">
+          <span className="loader-logo-image" aria-label="Triventa Exports Logo" role="img" />
+          <div className="loader-progress-container">
+            <div className="loader-progress-bar"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

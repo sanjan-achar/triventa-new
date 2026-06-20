@@ -1,5 +1,3 @@
-import React from 'react';
-
 function BeanCard({ bean, isSelected, onToggleSelect }) {
   const {
     id,
@@ -9,8 +7,6 @@ function BeanCard({ bean, isSelected, onToggleSelect }) {
     process,
     type,
     score,
-    notes,
-    variety,
     harvest,
     description,
     gradeCode,

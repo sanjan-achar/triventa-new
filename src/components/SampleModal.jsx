@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react';
 
 function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQuantity }) {
+  const createTrackingRef = () => {
+    const now = new Date();
+    const yy = String(now.getFullYear()).slice(-2);
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const seq = String(Math.floor(Math.random() * 999) + 1).padStart(3, '0');
+    return `TES-${yy}${mm}${seq}`;
+  };
+
   const [formData, setFormData] = useState({
     name: '',
     roastery: '',
@@ -16,25 +24,8 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
   );
   const [submissionStep, setSubmissionStep] = useState(0); // 0: input, 1: submitting, 2: success
   const [submitMessage, setSubmitMessage] = useState('Initiating request...');
-  const [trackingRef, setTrackingRef] = useState('');
+  const [trackingRef] = useState(createTrackingRef);
   const [copiedTrackingRef, setCopiedTrackingRef] = useState(false);
-
-  const createTrackingRef = () => {
-    const now = new Date();
-    const yy = String(now.getFullYear()).slice(-2);
-    const mm = String(now.getMonth() + 1).padStart(2, '0');
-    const seq = String(Math.floor(Math.random() * 999) + 1).padStart(3, '0');
-    return `TES-${yy}${mm}${seq}`;
-  };
-
-  useEffect(() => {
-    if (isOpen) {
-      setTrackingRef(createTrackingRef());
-      setSubmissionStep(0);
-      setSubmitMessage('Initiating request...');
-      setCopiedTrackingRef(false);
-    }
-  }, [isOpen]);
 
   const handleCopyTrackingRef = async () => {
     if (!trackingRef) return;
@@ -317,20 +308,20 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
             </p>
             <div className="success-details">
               <div className="copy-row">
-                <p>
-                  <strong>Tracking Reference:</strong> {trackingRef}
-                </p>
-                <button
-                  type="button"
-                  className={`copy-ref-btn ${copiedTrackingRef ? 'copied' : ''}`}
-                  onClick={handleCopyTrackingRef}
-                  aria-label="Copy tracking reference"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M8 7H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" />
-                    <rect x="9" y="3" width="11" height="11" rx="2" />
-                  </svg>
-                </button>
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', flexWrap: 'nowrap' }}>
+                  <strong>Tracking Ref:</strong> {trackingRef}
+                  <button
+                    type="button"
+                    className={`copy-ref-btn ${copiedTrackingRef ? 'copied' : ''}`}
+                    onClick={handleCopyTrackingRef}
+                    aria-label="Copy tracking reference"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M8 7H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3" />
+                      <rect x="9" y="3" width="11" height="11" rx="2" />
+                    </svg>
+                  </button>
+                </span>
                 {copiedTrackingRef && <span className="copy-feedback">Copied!</span>}
               </div>
               <p>A regional coffee trade representative from Triventa Exports will contact you at <strong>{formData.email}</strong> within 12 business hours to verify your roasting business credentials and dispatch the samples.</p>

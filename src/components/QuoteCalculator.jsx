@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-function QuoteCalculator({ beans, onOpenSampleModal, selectedBeanIds }) {
+function QuoteCalculator({ beans, selectedBeanIds }) {
   const [selectedBeanId, setSelectedBeanId] = useState(beans[0]?.id || '');
   const [unit, setUnit] = useState('bags'); // 'bags' (60kg) or 'fcl' (Full Container Load - 320 bags / 19.2 Tons)
   const [quantity, setQuantity] = useState(20);

@@ -3,10 +3,12 @@
   width: 100%;
   max-width: 100%;
   margin: 0 auto;
+  overflow-x: hidden;
 }
 
 .page-content {
   width: 100%;
+  overflow-x: hidden;
 }
 
 .calculator-container {
@@ -33,6 +35,8 @@
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
+  padding-inline: 40px;
+  box-sizing: border-box;
 }
 
 .logo-container {
@@ -2484,15 +2488,19 @@
   }
 
   .modal-form {
-    padding: 24px;
+    padding: 20px 16px;
   }
 }
 
 @media (max-width: 768px) {
   .site-header {
-    padding: 16px 20px;
+    padding: 16px 0;
     background-color: var(--bg-primary);
     border-bottom: 1px solid var(--border);
+  }
+
+  .header-container {
+    padding-inline: 20px;
   }
 
   .calculator-widget,
@@ -2516,7 +2524,7 @@
 
   .calc-left,
   .calc-right {
-    padding: 24px 16px;
+    padding: 40px 28px;
   }
 
   .calc-left {
@@ -2740,7 +2748,7 @@
   .calculator-section,
   .contact-banner,
   .site-footer {
-    padding: 48px 16px;
+    padding: 64px 28px;
   }
 
   .section-header {
@@ -2782,7 +2790,7 @@
 
   .calc-left,
   .calc-right {
-    padding: 20px 14px;
+    padding: 36px 24px;
   }
 
   .calc-unlock-form .form-row,
@@ -2799,7 +2807,7 @@
   }
 
   .teaser-content {
-    padding: 24px 12px;
+    padding: 36px 24px;
   }
 
   .teaser-panel {
@@ -2832,24 +2840,50 @@
 
 
   .modal-overlay {
-    padding: 12px;
+    padding: 8px;
   }
 
   .modal-container {
     max-height: 95vh;
+    border-radius: 6px;
   }
 
   .modal-title {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+  }
+
+  .modal-subtitle {
+    font-size: 0.88rem;
   }
 
   .modal-header {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    padding-right: 28px;
   }
 
   .modal-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
+  }
+
+  .modal-form .form-row {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .modal-beans-selection {
+    max-height: 220px;
+    gap: 8px;
+  }
+
+  .modal-bean-option {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .form-section-title {
+    font-size: 0.8rem;
+    margin-bottom: 14px;
   }
 
   .modal-footer {
@@ -2883,32 +2917,64 @@
   }
 
   .guide-card {
-    padding: 24px 16px;
+    padding: 40px 24px;
   }
 
   .guide-container {
     padding-inline: 0;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+  }
+
+  .guide-card,
+  .guide-card-title,
+  .guide-types-list,
+  .guide-type-item {
+    text-align: left;
   }
 
   .guide-section {
-    padding: 48px 16px;
+    padding: 64px 28px;
   }
 
   .guide-table-wrapper {
     margin-top: 12px;
+    overflow-x: hidden;
+  }
+
+  .guide-table {
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .guide-table th:nth-child(1),
+  .guide-table td:nth-child(1) {
+    width: 32%;
+  }
+
+  .guide-table th:nth-child(2),
+  .guide-table td:nth-child(2) {
+    width: 30%;
+  }
+
+  .guide-table th:nth-child(3),
+  .guide-table td:nth-child(3) {
+    width: 38%;
   }
 
   .guide-table th,
   .guide-table td {
-    padding: 10px 8px;
+    padding: 10px 6px;
+    word-break: break-word;
   }
 
   .guide-table th {
-    font-size: 0.75rem;
+    font-size: 0.72rem;
   }
 
   .guide-table td {
-    font-size: 0.85rem;
+    font-size: 0.82rem;
   }
 }
 

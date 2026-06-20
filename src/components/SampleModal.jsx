@@ -5,6 +5,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
     name: '',
     roastery: '',
     email: '',
+    phone: '',
     country: '',
     volume: '5-20',
     message: ''
@@ -68,7 +69,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
   if (!isOpen) return null;
 
   const handleCheckboxChange = (beanId) => {
-    setSelectedBeanIds(prev => 
+    setSelectedBeanIds(prev =>
       prev.includes(beanId)
         ? prev.filter(id => id !== beanId)
         : [...prev, beanId]
@@ -102,7 +103,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
     }
 
     setSubmissionStep(1);
-    
+
     const steps = [
       { msg: 'Connecting to origin supply database...', time: 800 },
       { msg: 'Verifying micro-lot warehouse availability...', time: 1600 },
@@ -137,17 +138,17 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
 
         {submissionStep === 0 && (
           <form
-          name="request-sample"
-          method="POST"
-          data-netlify="true"
-          netlify-honeypot="bot-field"
-          onSubmit={handleSubmit}
-          className="modal-form"
-        >
-          <input type="hidden" name="form-name" value="request-sample" />
-          <input type="hidden" name="bot-field" />
-          <input type="hidden" name="tracking-ref" value={trackingRef} />
-          <div className="modal-header">
+            name="request-sample"
+            method="POST"
+            data-netlify="true"
+            netlify-honeypot="bot-field"
+            onSubmit={handleSubmit}
+            className="modal-form"
+          >
+            <input type="hidden" name="form-name" value="request-sample" />
+            <input type="hidden" name="bot-field" />
+            <input type="hidden" name="tracking-ref" value={trackingRef} />
+            <div className="modal-header">
               <h3 className="modal-title">Request Specialty Green Samples</h3>
               <p className="modal-subtitle">
                 Select your desired micro-lots and enter your roastery details. We ship 300g cupping samples globally.
@@ -170,7 +171,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
                       />
                       <div className="modal-bean-info">
                         <span className="modal-bean-origin">{bean.origin}</span>
-                          <span className="modal-bean-name">{bean.name}</span>
+                        <span className="modal-bean-name">{bean.name}</span>
                       </div>
                     </label>
                   ))}
@@ -179,7 +180,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
 
               <div className="modal-col">
                 <h4 className="form-section-title">2. Roastery Information</h4>
-                
+
                 <div className="form-row">
                   <div className="form-group flex-1">
                     <label className="form-label required">Contact Name</label>
@@ -217,6 +218,18 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
                     value={formData.email}
                     onChange={handleInputChange}
                     required
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label">Contact Number</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    className="form-input"
+                    placeholder="e.g. +49 89 123456"
+                    value={formData.phone}
+                    onChange={handleInputChange}
                   />
                 </div>
 
@@ -264,7 +277,7 @@ function SampleModal({ isOpen, onClose, beans, initialSelectedBeanId, initialQua
             </div>
 
             <div className="modal-footer">
-              {initialQuantity && initialQuantity > 20 && (
+              {initialQuantity > 20 && (
                 <div className="modal-indicator">
                   Requesting quote parameters for <strong>{initialQuantity} bags</strong>
                 </div>

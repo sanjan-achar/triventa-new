@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, startTransition } from 'react';
 import './App.css';
 import coffeeHeroImg from './assets/coffee_hero.png';
 import BeanCard from './components/BeanCard';
@@ -224,8 +224,10 @@ function App() {
 
   useEffect(() => {
     if (!GOOGLE_SHEETS_CSV_URL) {
-      setError("No dynamic catalog Google Sheet URL is configured.");
-      setIsLoading(false);
+      startTransition(() => {
+        setError("No dynamic catalog Google Sheet URL is configured.");
+        setIsLoading(false);
+      });
       return;
     }
 
@@ -274,9 +276,9 @@ function App() {
       const stored = localStorage.getItem('sampleCart');
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) setSelectedBeanIds(parsed);
+        if (Array.isArray(parsed)) startTransition(() => setSelectedBeanIds(parsed));
       }
-    } catch (e) {
+    } catch {
       // ignore parse errors
     }
   }, []);
@@ -284,7 +286,7 @@ function App() {
   useEffect(() => {
     try {
       localStorage.setItem('sampleCart', JSON.stringify(selectedBeanIds));
-    } catch (e) {
+    } catch {
       // ignore storage errors
     }
   }, [selectedBeanIds]);

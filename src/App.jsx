@@ -424,6 +424,7 @@ function App() {
             <a href="#origins">Green Varieties</a>
             <a href="#guide">Grades Guide</a>
             <a href="#process">Sourcing Journey</a>
+            <a href="#certifications">Certifications</a>
             <a href="#calculator">FOB Calculator</a>
           </nav>
           <div className="header-actions">
@@ -474,6 +475,7 @@ function App() {
           <a href="#origins" onClick={() => setIsMobileMenuOpen(false)}>Green Varieties</a>
           <a href="#guide" onClick={() => setIsMobileMenuOpen(false)}>Grades Guide</a>
           <a href="#process" onClick={() => setIsMobileMenuOpen(false)}>Sourcing Journey</a>
+          <a href="#certifications" onClick={() => setIsMobileMenuOpen(false)}>Certifications</a>
           <a href="#calculator" onClick={() => setIsMobileMenuOpen(false)}>FOB Calculator</a>
 
           <button
@@ -846,6 +848,109 @@ function App() {
                 >
                   Next →
                 </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Certifications & Compliance Section */}
+      <section id="certifications" className="certifications-section">
+        <div className="certifications-container">
+          <div className="section-header text-center">
+            <h2 className="section-title">Verified Export Certifications</h2>
+            <p className="section-subtitle">Triventa Exports operates under strict regulatory compliance and global trade certifications.</p>
+          </div>
+          <div className="certifications-grid">
+            <div className="cert-card animate-fade-in">
+              <div className="cert-header-row">
+                <div className="cert-icon-wrapper">
+                  <svg className="cert-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                  </svg>
+                </div>
+                <div className="cert-title-group">
+                  <h3 className="cert-card-title">Coffee Board Sourced</h3>
+                  <span className="cert-badge">RCMC REGISTERED</span>
+                </div>
+              </div>
+              <p className="cert-description">
+                Registered exporter with the Coffee Board of India, guaranteeing compliant auction bidding, state grading, and authentic single-origin certificates.
+              </p>
+              <div className="cert-meta">
+                <div><strong>RCMC Certificate:</strong> <span>3463</span></div>
+              </div>
+            </div>
+
+            <div className="cert-card animate-fade-in">
+              <div className="cert-header-row">
+                <div className="cert-icon-wrapper">
+                  <svg className="cert-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    <path d="M2 12h20"/>
+                  </svg>
+                </div>
+                <div className="cert-title-group">
+                  <h3 className="cert-card-title">DGFT Licensed Exporter</h3>
+                  <span className="cert-badge">IEC COMPLIANT</span>
+                </div>
+              </div>
+              <p className="cert-description">
+                Licensed under the Directorate General of Foreign Trade, enabling smooth customs clearance and ocean freight logistics at the Port of Mangalore.
+              </p>
+              <div className="cert-meta">
+                <div><strong>IEC Number:</strong> <span>AAMCT6839P</span></div>
+              </div>
+            </div>
+
+            <div className="cert-card animate-fade-in">
+              <div className="cert-header-row">
+                <div className="cert-icon-wrapper">
+                  <svg className="cert-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                    <line x1="2" y1="10" x2="22" y2="10"/>
+                    <path d="M8 21h8"/>
+                    <path d="M12 17v4"/>
+                  </svg>
+                </div>
+                <div className="cert-title-group">
+                  <h3 className="cert-card-title">Global Logistics &amp; Clearance</h3>
+                  <span className="cert-badge">ICEGATE ENABLED</span>
+                </div>
+              </div>
+              <p className="cert-description">
+                Fully integrated with the Indian Customs Electronic Gateway (ICEGATE), allowing automated shipping bill filings, fast-track custom clearances, and transparent end-to-end data exchange with international freight networks.
+              </p>
+              <div className="cert-meta">
+                <div><strong>ICEGATE ID:</strong> <span>AAMCT6839PPIE000</span></div>
+                <div><strong>Port of Export:</strong> <span>Port of Mangalore (NMPT)</span></div>
+                <div><strong>Customs Network:</strong> <span>ICEGATE Active</span></div>
+              </div>
+            </div>
+
+            <div className="cert-card animate-fade-in">
+              <div className="cert-header-row">
+                <div className="cert-icon-wrapper">
+                  <svg className="cert-svg-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                    <line x1="16" y1="13" x2="8" y2="13"/>
+                    <line x1="16" y1="17" x2="8" y2="17"/>
+                    <polyline points="10 9 9 9 8 9"/>
+                  </svg>
+                </div>
+                <div className="cert-title-group">
+                  <h3 className="cert-card-title">International Coffee Org Traceability</h3>
+                  <span className="cert-badge">ICO CERTIFIED</span>
+                </div>
+              </div>
+              <p className="cert-description">
+                Every single coffee shipment exported by Triventa is issued a mandatory, unique ICO Certificate of Origin through the Coffee Board of India’s e-permit system, ensuring global traceability and origin authenticity for our international buyers.
+              </p>
+              <div className="cert-meta">
+                <div><strong>Compliance Standard:</strong> <span>International Coffee Agreement 2007</span></div>
+                <div><strong>Documentation:</strong> <span>ICO Certificate of Origin &amp; Valid Export Permits</span></div>
               </div>
             </div>
           </div>

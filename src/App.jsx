@@ -844,8 +844,8 @@ function App() {
       <section id="process" className="process-section">
         <div className="process-inner">
           <div className="section-header text-center">
-            <h2 className="section-title">The Green Sourcing Journey</h2>
-            <p className="section-subtitle">Traceable and verified steps from Coffee Boards to international ports.</p>
+            <h2 className="section-title">Our Indian Coffee Export Process</h2>
+            <p className="section-subtitle">Traceable and verified steps from Indian coffee farms to international ports.</p>
           </div>
 
           <div className="process-container">

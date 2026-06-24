@@ -246,12 +246,6 @@ function App() {
   };
 
   useEffect(() => {
-    if (currentPath === '/' || currentPath === '') {
-      document.title = "Coffee Exports in India | Indian Green Coffee Exporters & Suppliers - Triventa";
-    }
-  }, [currentPath]);
-
-  useEffect(() => {
     const timer = setTimeout(() => {
       setIsInitialLoading(false);
     }, 3000);
@@ -398,9 +392,9 @@ function App() {
 
   const timelineSteps = [
     {
-      title: "Indian Coffee Board Sourcing",
-      subtitle: "Phase 1: Auction & Indian Coffee Board Sourcing",
-      desc: "We secure our premium coffee exports in India directly through the local Coffee Board of India auctions in Chikkamagaluru, validating authentic plantation origins and supporting transparent pricing structures for growers."
+      title: "Local Coffee Board Sourcing",
+      subtitle: "Phase 1: Auction & Board Sourcing",
+      desc: "We secure our high-grade green coffee lots directly through the local coffee boards in Chikkamagaluru, validating authentic plantation origins and supporting transparent pricing structures for growers."
     },
     {
       title: "Grading & Density Selection",
@@ -544,11 +538,10 @@ function App() {
               <span className="hero-badge">Coffee Exporters from KARNATAKA.</span>
               <p className="hero-slogan"></p>
               <h1 className="hero-title">
-                <span className="hero-title-sub">Coffee Exports in India</span>
-                <span className="hero-title-main">Your Gateway to Global Markets</span>
+                Your Gateway to Global Markets
               </h1>
               <p className="hero-description">
-                Triventa Exports is a premium green coffee exporter in India. We supply bulk raw coffee beans directly sourced from the Coffee Board of India auctions in Karnataka. We specialize in wholesale unroasted Arabica and Robusta coffee bean exports for global roasters.
+                Triventa Exports supplies unroasted green coffee beans sourced through the local coffee boards in Karnataka, India. We deal exclusively in raw green Arabica and Robusta grades for global roasters.
               </p>
               <div className="hero-actions-container">
                 <a href="#origins" className="primary-btn">
@@ -580,8 +573,8 @@ function App() {
         <section className="pillars-section">
           <div className="pillars-container">
             <div className="section-header text-center">
-              <h2 className="section-title">Premium Indian Green Coffee Exporters</h2>
-              <p className="section-subtitle">We source bulk unroasted coffee beans through the Coffee Board of India and export premium grades to global roasters.</p>
+              <h2 className="section-title">Specialized Green Coffee Exports</h2>
+              <p className="section-subtitle">We secure raw green coffee through local coffee boards and ship container loads directly to international roasteries.</p>
             </div>
             <div className="pillars-grid">
               <div className="pillar-card">
@@ -613,8 +606,8 @@ function App() {
         <section id="origins" className="showcase-section">
           <div className="showcase-container">
             <div className="section-header">
-              <h2 className="section-title">Wholesale Green Coffee Beans from India</h2>
-              <p className="section-subtitle">Browse raw green coffee grades sourced directly from local auctions in Chikkamagaluru &amp; Coorg.</p>
+              <h2 className="section-title">Wholesale Green Coffee Catalog</h2>
+              <p className="section-subtitle">Browse raw green coffee grades sourced directly from local auctions.</p>
             </div>
 
             {/* Filter Controls */}
